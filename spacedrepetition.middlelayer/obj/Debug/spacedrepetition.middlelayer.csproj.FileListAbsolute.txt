@@ -1,0 +1,10 @@
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\bin\Debug\spacedrepetition.middlelayer.dll
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\bin\Debug\spacedrepetition.middlelayer.pdb
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\obj\Debug\spacedrepetition.middlelayer.dll
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\obj\Debug\spacedrepetition.middlelayer.pdb
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\bin\Debug\spacedrepetition.middlelayer.dll.config
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\bin\Debug\EntityFramework.dll
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\bin\Debug\EntityFramework.SqlServer.dll
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\bin\Debug\EntityFramework.xml
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\bin\Debug\EntityFramework.SqlServer.xml
+F:\Dropbox\AfterUG\My-Desktop\SpacedRepetitionMVP\spacedrepetition.middlelayer\obj\Debug\spacedrepetition.middlelayer.csprojResolveAssemblyReference.cache
