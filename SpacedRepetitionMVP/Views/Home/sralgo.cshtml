@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Spaced Repetition Algorithm";
+}
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="~/Scripts/myApp.js"></script>
+<script src="~/Scripts/srCtrl.js"></script>
+<div class="jumbotron">
+    <h1>Spaced Repetition Algorithm</h1>
+
+</div>
+<div ng-app="myApp" ng-controller="srCtrl">
+    <div class="row">
+        <div class="col-md-10 text-left">
+            <p><b>QNo : 1</b></p><br />
+            <p>{{question}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <br />
+            <input type="radio" name="choice" ng-model="valueAns" value="{{choice1}}" ng-change="evaluateUserAnswer(valueAns)"/><span>{{choice1}}</span><br />
+            <input type="radio" name="choice" ng-model="valueAns" value="{{choice2}}" ng-change="evaluateUserAnswer(valueAns)"/><span>{{choice2}}</span><br />
+            <input type="radio" name="choice" ng-model="valueAns" value="{{choice3}}" ng-change="evaluateUserAnswer(valueAns)"/><span>{{choice3}}</span><br />
+            <input type="radio" name="choice" ng-model="valueAns" value="{{choice4}}" ng-change="evaluateUserAnswer(valueAns)"/><span>{{choice4}}</span><br />
+            
+            <br />
+        </div>
+        <div class="col-md-6">
+            <h2>Result</h2>
+            <div>
+                <div ng-if="(uiDummyCorrect) && (userAnswered)">
+                    <i style="color:green;" class="fa fa-check fa-4x" aria-hidden="true"></i>
+                    <p>You answered this question correctly. You will see this question one more time</p>
+                </div>
+                <div ng-if="(!uiDummyCorrect) && (userAnswered)">
+                    <i style="color:red;" class="fa fa-remove fa-4x" aria-hidden="true"></i>
+                    <p>You answer is wrong. You will see this question more often</p>
+                </div>
+            </div><br/>
+            
+            
+            <div ng-if="!(testComplete)">
+                <a ng-click="bindQuesToUi()"><input type="button" value="Next" class="btn btn-primary" /></a><br /><br />    
+            </div>
+            <div ng-if="(testComplete)">
+                
+                @Html.ActionLink("Mul Choice", "Index", "Home")
+            </div>
+        </div>
+
+    </div>
+</div>

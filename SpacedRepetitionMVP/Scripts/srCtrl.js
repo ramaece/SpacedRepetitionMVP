@@ -53,6 +53,7 @@ app.controller('srCtrl', function ($scope) {
     $scope.dummyCorrect = false;
     $scope.attemptsArray = [];
     $scope.questionCountArray = [];
+    $scope.testComplete = false;
     for (i = 1; i <= $scope.totalNoOfQuestionsCount ; i++) {
         $scope.shuffledArray[i - 1] = i;
         $scope.attemptsArray[i - 1] = 0;
@@ -69,7 +70,7 @@ app.controller('srCtrl', function ($scope) {
     $scope.bindQuesToUi = function () {
 
         if ($scope.shuffledArray.length) {
-            
+
             $scope.resetRadios();
             $scope.question = $scope.quesAndAns[$scope.shuffledArray[0] - 1].ques;
             $scope.choice1 = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C1;
@@ -80,9 +81,11 @@ app.controller('srCtrl', function ($scope) {
             $scope.corrAns = $scope.quesAndAns[$scope.shuffledArray[0] - 1].correctAnswer;
             $scope.userAnswered = false;
             $scope.radioCount = 0;
-           // $scope.qNo = $scope.qNo + 1;
-            
-            
+            // $scope.qNo = $scope.qNo + 1;
+
+
+        } else {
+            $scope.testComplete = true;
         }
 
     };
