@@ -60,8 +60,6 @@ app.controller('srCtrl', function ($scope) {
     }
     
     for (i = 1; i <= $scope.incorrectMaxNoOfQuestionsToAdd ; i++) {
-       
-       
         $scope.questionCountArray[i - 1] = i;
     }
 
