@@ -50,26 +50,36 @@ app.controller('multipleChoiceCtrl', function ($scope) {
     $scope.radioCount = 0;
     $scope.questionCountArray = [];
     $scope.score = 0;
+    $scope.choiceRandom = [];
+    $scope.choiceRandomData = [];
     for (i = 1; i <= $scope.totalNoOfQuestionsCount ; i++) {
         $scope.shuffledArray[i - 1] = i;
     }
 
+    
+    
+
+
     $scope.bindQuesToUi = function () {
 
         if ($scope.qNo <= $scope.totalNoOfQuestionsCount) {
-
+            var position = $scope.shuffledArray[$scope.qNo - 1] - 1;
+            console.log(position);
             $scope.resetRadios();
-            $scope.question = $scope.quesAndAns[$scope.qNo - 1].ques;
-            $scope.choice1 = $scope.quesAndAns[$scope.qNo - 1].C1;
-            $scope.choice2 = $scope.quesAndAns[$scope.qNo - 1].C2;
-            $scope.choice3 = $scope.quesAndAns[$scope.qNo - 1].C3;
-            $scope.choice4 = $scope.quesAndAns[$scope.qNo - 1].C4;
+            $scope.question = $scope.quesAndAns[position].ques;
+            $scope.choiceRandomData[0] = $scope.quesAndAns[position].C1;
+            $scope.choiceRandomData[1] = $scope.quesAndAns[position].C2;
+            $scope.choiceRandomData[2] = $scope.quesAndAns[position].C3;
+            $scope.choiceRandomData[3] = $scope.quesAndAns[position].C4;
+            $scope.shuffleChoices();
+            $scope.bindRandomChoices();
 
-            $scope.corrAns = $scope.quesAndAns[$scope.qNo - 1].correctAnswer;
+
+            $scope.corrAns = $scope.quesAndAns[position].correctAnswer;
             $scope.userAnswered = false;
             $scope.radioCount = 0;
             $scope.qNo = $scope.qNo + 1;
-
+            
 
         } else {
             $scope.testcomplete = true;
@@ -81,6 +91,15 @@ app.controller('multipleChoiceCtrl', function ($scope) {
         $scope.valueAns = '';
 
     }
+
+    $scope.bindRandomChoices = function (value) {
+        $scope.choice1 = $scope.choiceRandomData[0];
+        $scope.choice2 = $scope.choiceRandomData[1];
+        $scope.choice3 = $scope.choiceRandomData[2];
+        $scope.choice4 = $scope.choiceRandomData[3];
+        
+
+    }
     $scope.evaluateUserAnswer = function (value) {
         $scope.radioCount = $scope.radioCount + 1;
         $scope.userAnswered = true;
@@ -88,20 +107,45 @@ app.controller('multipleChoiceCtrl', function ($scope) {
             if (value === $scope.corrAns) {
                 $scope.correct = true;
                 $scope.score = $scope.score + 1;
-               
+
             }
             else {
                 $scope.correct = false;
-               
+
             }
         }
     };
 
-  
-    
+    $scope.shuffle = function () {
+        a = $scope.shuffledArray;
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+        $scope.shuffledArray = a;
+        //console.log($scope.shuffledArray);
+    }
+    $scope.shuffleChoices = function () {
+        a = $scope.choiceRandomData;
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+        $scope.choiceRandomData = a;
+        //console.log($scope.shuffledArray);
+    }
+
+
+
+    $scope.shuffle();
+    $scope.shuffleChoices();
     $scope.bindQuesToUi();
-
-
 
 });
 

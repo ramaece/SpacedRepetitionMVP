@@ -53,6 +53,7 @@ app.controller('srCtrl', function ($scope) {
     $scope.dummyCorrect = false;
     $scope.attemptsArray = [];
     $scope.questionCountArray = [];
+    $scope.choiceRandomData = [];
     $scope.testComplete = false;
     for (i = 1; i <= $scope.totalNoOfQuestionsCount ; i++) {
         $scope.shuffledArray[i - 1] = i;
@@ -73,11 +74,14 @@ app.controller('srCtrl', function ($scope) {
 
             $scope.resetRadios();
             $scope.question = $scope.quesAndAns[$scope.shuffledArray[0] - 1].ques;
-            $scope.choice1 = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C1;
-            $scope.choice2 = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C2;
-            $scope.choice3 = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C3;
-            $scope.choice4 = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C4;
+         
 
+            $scope.choiceRandomData[0] = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C1;
+            $scope.choiceRandomData[1] = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C2;
+            $scope.choiceRandomData[2] = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C3;
+            $scope.choiceRandomData[3] = $scope.quesAndAns[$scope.shuffledArray[0] - 1].C4;
+            $scope.shuffleChoices();
+            $scope.bindRandomChoices();
             $scope.corrAns = $scope.quesAndAns[$scope.shuffledArray[0] - 1].correctAnswer;
             $scope.userAnswered = false;
             $scope.radioCount = 0;
@@ -145,6 +149,27 @@ app.controller('srCtrl', function ($scope) {
         
     };
 
+    $scope.bindRandomChoices = function (value) {
+        $scope.choice1 = $scope.choiceRandomData[0];
+        $scope.choice2 = $scope.choiceRandomData[1];
+        $scope.choice3 = $scope.choiceRandomData[2];
+        $scope.choice4 = $scope.choiceRandomData[3];
+
+
+    }
+    $scope.shuffleChoices = function () {
+        a = $scope.choiceRandomData;
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+        $scope.choiceRandomData = a;
+        //console.log($scope.shuffledArray);
+    }
+
     $scope.shuffle = function () {
         a = $scope.shuffledArray;
         var j, x, i;
@@ -204,6 +229,7 @@ app.controller('srCtrl', function ($scope) {
     }
 
     $scope.shuffle();
+    $scope.shuffleChoices();
     $scope.bindQuesToUi();
 
 
