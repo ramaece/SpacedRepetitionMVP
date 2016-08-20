@@ -1,5 +1,6 @@
 ﻿
 app.controller('multipleChoiceCtrl', function ($scope) {
+    // Comment added from sugu machine on sugu brnach
     $scope.quesAndAns = [
 {
     ques: 'Which one of the following animals was not represented on the seals and terracotta art of the Harappan Culture?',
