@@ -1,5 +1,6 @@
 ﻿
 app.controller('srCtrl', function ($scope) {
+    //Another merge test
     $scope.quesAndAns = [
 {
     ques: 'Which one of the following animals was not represented on the seals and terracotta art of the Harappan Culture?',

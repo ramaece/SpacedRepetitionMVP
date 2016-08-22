@@ -3,6 +3,7 @@ app.controller('multipleChoiceCtrl', function ($scope) {
     // Comment added from sugu machine on sugu brnach
     // Ram created a new branch
     //Ram created another branch before merge
+    //Another merge test
     $scope.quesAndAns = [
 {
     ques: 'Which one of the following animals was not represented on the seals and terracotta art of the Harappan Culture?',
