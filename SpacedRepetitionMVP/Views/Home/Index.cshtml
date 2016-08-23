@@ -19,6 +19,13 @@
             <p>{{question}}</p>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{Message}} <br />
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6">
             <br />
@@ -26,18 +33,15 @@
             <input type="radio" name="choice" ng-model="valueAns" value="{{choice2}}" ng-change="evaluateUserAnswer(valueAns)" /><span> {{choice2}}</span><br />
             <input type="radio" name="choice" ng-model="valueAns" value="{{choice3}}" ng-change="evaluateUserAnswer(valueAns)" /><span> {{choice3}}</span><br />
             <input type="radio" name="choice" ng-model="valueAns" value="{{choice4}}" ng-change="evaluateUserAnswer(valueAns)" /><span> {{choice4}}</span><br />
-
             <br />
             
             <div ng-if="!(testcomplete)">
-                <a ng-click="bindQuesToUi()"><input type="button" value="Next" class="btn btn-primary" /></a><br /><br />
+                <a ng-click="!valueAns || bindQuesToUi()"><input type="button"  ng-disabled="!valueAns" value="Next" class="btn btn-primary" /></a><br /><br />
             </div>
             <div ng-if="(testcomplete)">
                 <h3>Your Score is : {{score}}</h3>
                 @Html.ActionLink("Go to Study Session", "sralgo", "Home")
             </div>
         </div>
-       
-
     </div>
 </div>

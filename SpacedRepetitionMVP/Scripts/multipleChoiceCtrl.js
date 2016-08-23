@@ -1,5 +1,5 @@
 ﻿
-app.controller('multipleChoiceCtrl', function ($scope) {
+app.controller('multipleChoiceCtrl', function ($scope, $interval) {
     // Comment added from sugu machine on sugu brnach
     $scope.quesAndAns = [
 {
@@ -266,6 +266,7 @@ app.controller('multipleChoiceCtrl', function ($scope) {
 }
 
     ];
+
     $scope.qNo = 1;
     $scope.totalNoOfQuestionsCount = $scope.quesAndAns.length;
     $scope.testcomplete = false;
@@ -275,17 +276,43 @@ app.controller('multipleChoiceCtrl', function ($scope) {
     $scope.score = 0;
     $scope.choiceRandom = [];
     $scope.choiceRandomData = [];
-    for (i = 1; i <= $scope.totalNoOfQuestionsCount ; i++) {
+    //Initiate the Timer object.
+    //$scope.Timer = null;
+    
+    for (i = 1; i <= $scope.totalNoOfQuestionsCount ; i++)
+    {
         $scope.shuffledArray[i - 1] = i;
     }
 
-    
-    
+    //Timer start function.
+    //$scope.StartTimer = function ()
+    //{
+    //    $scope.Message = "Duration : ";
 
+    //    //Initialize the Timer to run every 1000 milliseconds i.e. one second.
+    //    $scope.Timer = $interval(function ()
+    //    {
+    //        //Display the current time.
+    //        var time = $filter('date')(new Date(), 'HH:mm:ss');
+    //        $scope.Message = "Duration :  " + time;
+    //    }, 1000);
+    //};
+
+    ////Timer stop function.
+    //$scope.StopTimer = function () {
+
+    //    //Set the Timer stop message.
+    //    $scope.Message = "Total Duration : ";
+
+    //    //Cancel the Timer.
+        
+    //        $interval.cancel($scope.Timer);
+        
+    //};
 
     $scope.bindQuesToUi = function () {
-
-        if ($scope.qNo <= $scope.totalNoOfQuestionsCount) {
+        if ($scope.qNo <= $scope.totalNoOfQuestionsCount)
+        {
             var position = $scope.shuffledArray[$scope.qNo - 1] - 1;
             console.log(position);
             $scope.resetRadios();
@@ -294,48 +321,52 @@ app.controller('multipleChoiceCtrl', function ($scope) {
             $scope.choiceRandomData[1] = $scope.quesAndAns[position].C2;
             $scope.choiceRandomData[2] = $scope.quesAndAns[position].C3;
             $scope.choiceRandomData[3] = $scope.quesAndAns[position].C4;
+
             $scope.shuffleChoices();
             $scope.bindRandomChoices();
-
 
             $scope.corrAns = $scope.quesAndAns[position].correctAnswer;
             $scope.userAnswered = false;
             $scope.radioCount = 0;
             $scope.qNo = $scope.qNo + 1;
-            
-
-        } else {
+            //$scope.StartTimer();
+            $scope.startTimerWithInterval();
+        }
+        else
+        {
             $scope.testcomplete = true;
         }
-
     };
 
     $scope.resetRadios = function () {
         $scope.valueAns = '';
-
     }
 
-    $scope.bindRandomChoices = function (value) {
+    $scope.bindRandomChoices = function (value)
+    {
         $scope.choice1 = $scope.choiceRandomData[0];
         $scope.choice2 = $scope.choiceRandomData[1];
         $scope.choice3 = $scope.choiceRandomData[2];
         $scope.choice4 = $scope.choiceRandomData[3];
-        
-
     }
-    $scope.evaluateUserAnswer = function (value) {
+
+    $scope.evaluateUserAnswer = function (value)
+    {
         $scope.radioCount = $scope.radioCount + 1;
         $scope.userAnswered = true;
-        if ($scope.radioCount === 1) {
-            if (value === $scope.corrAns) {
+        if ($scope.radioCount === 1)
+        {
+            if (value === $scope.corrAns)
+            {
                 $scope.correct = true;
                 $scope.score = $scope.score + 1;
-
             }
-            else {
+            else
+            {
                 $scope.correct = false;
-
             }
+            //$scope.StopTimer();
+            //$scope.r
         }
     };
 
@@ -351,6 +382,7 @@ app.controller('multipleChoiceCtrl', function ($scope) {
         $scope.shuffledArray = a;
         //console.log($scope.shuffledArray);
     }
+
     $scope.shuffleChoices = function () {
         a = $scope.choiceRandomData;
         var j, x, i;
@@ -364,11 +396,48 @@ app.controller('multipleChoiceCtrl', function ($scope) {
         //console.log($scope.shuffledArray);
     }
 
+    $scope.timerWithInterval = 0;
+
+    $scope.startTimerWithInterval = function ()
+    {
+        $scope.timerWithInterval = 0;
+        if ($scope.myInterval)
+        {
+            $interval.cancel($scope.myInterval);
+        }
+
+        $scope.onInterval = function ()
+        {
+            $scope.timerWithInterval++;
+        }
+        $scope.myInterval = $interval($scope.onInterval, 1000);
+    };
+
+    $scope.resetTimerWithInterval = function ()
+    {
+        $scope.timerWithInterval = 0;
+        $interval.cancel($scope.myInterval);
+    }
 
 
     $scope.shuffle();
     $scope.shuffleChoices();
     $scope.bindQuesToUi();
+    //$scope.StartTimer();
+    $scope.startTimerWithInterval();
+})
+app.filter('hhmmss', function () {
+    return function (time) {
+        var sec_num = parseInt(time, 10); // don't forget the second param
+        var hours = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
+        if (hours < 10) { hours = "0" + hours; }
+        if (minutes < 10) { minutes = "0" + minutes; }
+        if (seconds < 10) { seconds = "0" + seconds; }
+        var time = hours + ':' + minutes + ':' + seconds;
+        return time;
+    }
 });
 
